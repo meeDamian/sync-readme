@@ -61,6 +61,10 @@ CODE=$(jq -n \
       -H "Authorization: JWT ${TOKEN}" \
       -w "%{http_code}" "${DOCKERHUB_API}/repositories/${SLUG}/")
 
+echo "========"
+echo "${CODE}"
+echo "========"
+
 if [ "${CODE}" != "200" ]; then
   printf "\n\tERR: Unable to update description on Docker Hub\n"
   exit 1
