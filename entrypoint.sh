@@ -53,10 +53,13 @@ if [ -z "${TOKEN}" ]; then
 fi
 
 # Try to PATCH $SLUG full_description with the contents of $README file
+# NOTE: `--http2-prior-knowledge` added beacuse:
+#    https://github.com/vfarcic/docker-flow-proxy/issues/410#issuecomment-361075815
 CODE=$(jq -n \
   --arg full_description "$(cat "${README}")" \
   '{"registry": "registry-1.docker.io", $full_description}' \
   | curl -sL  -X PATCH  -d @-  -o /dev/null \
+      --http2-prior-knowledge \
       -H "Content-Type: application/json" \
       -H "Authorization: JWT ${TOKEN}" \
       -w "%{http_code}" "${DOCKERHUB_API}/repositories/${SLUG}/")
