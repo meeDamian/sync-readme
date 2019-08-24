@@ -37,11 +37,11 @@ README=${INPUT_README:-./README.md}
 
 if [ ! -f "${README}" ]; then
   >&2 printf "\nERR: '%s' file doesn't exit\n\n" "${README}"
-  >&2 printf "Either create it, or point to the one you want to be used with:\n"
+  >&2 printf "Either create it, or point to the file you want to be used with:\n"
   >&2 printf "\tuses: meeDamian/sync-readme@TAG\n"
   >&2 printf "\twith:\n"
   >&2 printf "\t  ...\n"
-  >&2 printf "\t  readme: PATH_TO_FILE\n"
+  >&2 printf "\t  readme: PATH_TO_FILE\n\n"
   exit 1
 fi
 
