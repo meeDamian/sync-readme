@@ -42,7 +42,7 @@ steps:
 
 > **NOTE_2:** `master` branch may sometimes be broken, or change behavior.  It's highly recommended to always use [tags].
 
-[is done]: https://github.com/meeDamian/sync-readme/blob/master/entrypoint.sh#L34-L38
+[is done]: https://github.com/meeDamian/sync-readme/blob/master/entrypoint.sh#L32-L35
 [tags]: https://github.com/meeDamian/sync-readme/tags
 
 # License
