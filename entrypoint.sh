@@ -10,7 +10,7 @@ input_error() {
   >&2 printf "\nERR: Invalid input: '%s' is required, and must be specified.\n\n" "$1"
   >&2 printf "\tNote: It's the %s\n" "$2"
   >&2 printf "Try:\n"
-  >&2 printf "\tuses: meeDamian/docker-ci/sync-readme@TAG\n"
+  >&2 printf "\tuses: meeDamian/sync-readme@TAG\n"
   >&2 printf "\twith:\n"
   >&2 printf "\t  user: \${{ secrets.DOCKER_USER }}\n"
   >&2 printf "\t  pass: \${{ secrets.DOCKER_PASS }}\n"
@@ -34,6 +34,16 @@ DOCKERHUB_API="https://hub.docker.com/v2"
 
 # If no README.md path is provided, use one at the root of the repo
 README=${INPUT_README:-./README.md}
+
+if [ ! -f "${README}" ]; then
+  >&2 printf "\nERR: '%s' file doesn't exit\n\n" "${README}"
+  >&2 printf "Either create it, or point to the one you want to be used with:\n"
+  >&2 printf "\tuses: meeDamian/sync-readme@TAG\n"
+  >&2 printf "\twith:\n"
+  >&2 printf "\t  ...\n"
+  >&2 printf "\t  readme: PATH_TO_FILE\n"
+  exit 1
+fi
 
 # Github allows mixed case slugs.  Docker Hub doesn't, and requires lowercase only.
 # It's annoying.  The lines below fix that common mistake.
