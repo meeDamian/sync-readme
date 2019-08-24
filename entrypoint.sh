@@ -56,7 +56,7 @@ fi
 CODE=$(jq -n \
   --arg full_description "$(cat "${README}")" \
   '{"registry": "registry-1.docker.io", $full_description}' \
-  | curl -sL  -X PATCH  -d @-  -o /dev/null \
+  | curl -sL  -X PATCH  -d @-  \
       -H "Content-Type: application/json" \
       -H "Authorization: JWT ${TOKEN}" \
       -w "%{http_code}" "${DOCKERHUB_API}/repositories/${SLUG}/")
