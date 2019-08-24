@@ -1,0 +1,27 @@
+name: Docker Hub README.md sync
+description: Sync README.md from Github to Docker Hub
+author: 'Damian Mee <spam@meedamian.com>'
+inputs:
+  user:
+    description: Docker Hub username
+    required: true
+
+  pass:
+    description: Docker Hub password
+    required: true
+
+  slug:
+    description: "Docker Hub repository path in the form of: <namespace>/<name>.  Gets converted to lower case."
+    required: true
+
+  readme:
+    description: Optional relative path to the README.md file.  If not provided, one at repo root used.
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  color: 'green'
+  icon: 'target'
