@@ -20,6 +20,12 @@ inputs:
     description: Optional relative path to the README.md file.  If not provided, one at repo root used.
     required: false
 
+  description:
+    description: |
+      Docker Hub repo's short description to set.  If set to just `true`, Github's desription is used.
+      If omitted, no action is performed.
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'

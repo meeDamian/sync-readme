@@ -14,9 +14,10 @@ If your `user`-name, and the repo path (`slug`) are both the same on Github and 
 steps:
 - uses: actions/checkout@master
 
-- uses: meeDamian/sync-readme@v1.0.2
+- uses: meeDamian/sync-readme@v1.0.4
   with:
     pass: ${{ secrets.DOCKER_PASS }}
+    description: true
 ```
 
 #### All custom
@@ -24,23 +25,25 @@ steps:
 If everything needs to be specified: 
 
 ```yaml
-
 steps:
 - uses: actions/checkout@master
 
-- uses: meeDamian/sync-readme@v1.0.2
+- uses: meeDamian/sync-readme@v1.0.4
   with:
     user: docker-username
     pass: ${{ secrets.DOCKER_PASS }}
     slug: organization/image-name
     readme: ./docker/description.md
+    description: A must-have container, that you can't live without.
 ```
 
 > **NOTE:** Add Docker Hub password to "Secrets" section in your repo's settings.
  
 > **NOTE_1:** Docker Hub requires `user`, and `slug` to be lowercase.  Conversion [is done] automatically for you, so that Github's `meeDamian` becomes `meedamian` when passed to Docker.
 
-> **NOTE_2:** `master` branch may sometimes be broken, or change behavior.  It's highly recommended to always use [tags].
+> **NOTE_2:** `description` sets Docker Hub short description to its literal content in all cases, except when it's set to `true`, when Github repo description is used instead.  When skipped, no change is made to Docker Hub description.
+
+> **NOTE_3:** `master` branch may sometimes be broken, or change behavior.  It's highly recommended to always use [tags].
 
 [is done]: https://github.com/meeDamian/sync-readme/blob/master/entrypoint.sh#L32-L35
 [tags]: https://github.com/meeDamian/sync-readme/tags

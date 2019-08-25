@@ -39,7 +39,7 @@ DOCKERHUB_API="https://hub.docker.com/v2"
 printf "Syncing %s to %s…\t" "${README}" "${SLUG}"
 
 # First GET $TOKEN from the /login endpoint
-TOKEN=$(jq -n \
+TOKEN=$(jq -nc \
   --arg username "${USER}" \
   --arg password "${INPUT_PASS}" \
   '{$username, $password}' \
@@ -52,10 +52,28 @@ if [ -z "${TOKEN}" ]; then
   exit 1
 fi
 
+# By default, do nothing
+DESC=null
+
+# If something was indeed passed to `description:`, then…
+if [ -n "${INPUT_DESCRIPTION}" ]; then
+  # Add extra quotes, to make it a valid JSON string
+  DESC="\"${INPUT_DESCRIPTION}\""
+
+  # If it was set to `true`, then fetch from Github.
+  #   No quoting necessary, as it either returns a valid JSON string, or null
+  if [ "${INPUT_DESCRIPTION}" = "true" ]; then
+    DESC=$(curl -s "https://api.github.com/repos/${SLUG}" | jq '.description')
+  fi
+fi
+
 # Try to PATCH $SLUG full_description with the contents of $README file
-CODE=$(jq -n \
+#   Note: `| del(.[] | nulls)` part removes `description:` key from object, to prevent overwriting it.
+#   Note: `--argjson` is used so that `null` is a valid value, that can be easily filtered-out later.
+CODE=$(jq -nc \
   --arg full_description "$(cat "${README}")" \
-  '{"registry": "registry-1.docker.io", $full_description}' \
+  --argjson description "${DESC}" \
+  '{"registry": "registry-1.docker.io", $full_description, $description} | del(.[] | nulls)' \
   | curl -sL  -X PATCH  -d @-  -o /dev/null \
       -H "Content-Type: application/json" \
       -H "Authorization: JWT ${TOKEN}" \
