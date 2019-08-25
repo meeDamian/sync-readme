@@ -1,5 +1,5 @@
-name: Docker Hub README.md sync
-description: Sync README.md from Github to Docker Hub
+name: Docker Hub README & description sync
+description: Sync README.md and description from Github to Docker Hub
 author: 'Damian Mee <spam@meedamian.com>'
 inputs:
   user:
