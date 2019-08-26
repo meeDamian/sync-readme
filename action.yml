@@ -26,6 +26,11 @@ inputs:
       If omitted, no action is performed.
     required: false
 
+outputs:
+  some-value:
+    description: aaaaaaaaaa
+    value: 333
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
