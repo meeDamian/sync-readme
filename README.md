@@ -1,4 +1,14 @@
-# sync-readme
+# meeDamian/sync-readme
+
+[![gh_last_release_svg]][gh_last_release_url]
+[![tippin_svg]][tippin_url]
+
+[gh_last_release_svg]: https://img.shields.io/github/v/release/meeDamian/sync-readme?sort=semver
+[gh_last_release_url]: https://github.com/meeDamian/sync-readme/releases/latest
+
+[tippin_svg]: https://img.shields.io/badge/donate-lightning-FDD023?logo=bitcoin&style=flat
+[tippin_url]: https://tippin.me/@meeDamian
+
 Github Action to sync `README.md` from Github to Docker Hub
 
 # Usage
