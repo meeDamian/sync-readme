@@ -63,7 +63,7 @@ if [ -n "${INPUT_DESCRIPTION}" ]; then
   # If it was set to `true`, then fetch from Github.
   #   No quoting necessary, as it either returns a valid JSON string, or null
   if [ "${INPUT_DESCRIPTION}" = "true" ]; then
-    DESC=$(curl -s "https://api.github.com/repos/${SLUG}" | jq '.description')
+    DESC=$(curl -s "https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}" | jq '.description')
   fi
 fi
 
