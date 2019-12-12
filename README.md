@@ -16,6 +16,18 @@ Github Action to sync `README.md` from Github to Docker Hub
 See [action.yml](action.yml)
 
 
+## Warning
+
+As of right now, this action **will not work** if you have 2FA on Docker Hub enabled!
+
+It's impossible to login automatically when 2FA is used, and using Docker API Token results with:
+
+```json
+{"detail": "access to the resource is forbidden with personal access token"}
+```
+
+I'll try to update it as soon as the solution is found, and any suggestions welcome.
+
 #### Minimal
 
 If your `user`-name, and the repo path (`slug`) are both the same on Github and Docker Hub, and `README.md` is located at repo's root, it's enough to:
