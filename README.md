@@ -7,7 +7,7 @@
 [gh_last_release_url]: https://github.com/meeDamian/sync-readme/releases/latest
 
 [tippin_svg]: https://img.shields.io/badge/donate-lightning-FDD023?logo=bitcoin&style=flat
-[tippin_url]: https://tippin.me/@meeDamian
+[tippin_url]: http://btl.to/@meedamian
 
 Github Action to sync `README.md` from Github to Docker Hub
 
