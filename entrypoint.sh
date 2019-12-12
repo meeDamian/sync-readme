@@ -74,13 +74,14 @@ CODE=$(jq -nc \
   --arg full_description "$(cat "${README}")" \
   --argjson description "${DESC}" \
   '{"registry": "registry-1.docker.io", $full_description, $description} | del(.[] | nulls)' \
-  | curl -sL  -X PATCH  -d @-  -o /dev/null \
+  | curl -sL  -X PATCH  -d @-  -o /tmp/out \
       -H "Content-Type: application/json" \
       -H "Authorization: JWT ${TOKEN}" \
       -w "%{http_code}" "${DOCKERHUB_API}/repositories/${SLUG}/")
 
 if [ "${CODE}" != "200" ]; then
   printf "\n\tERR: Unable to update description on Docker Hub\n"
+  cat /tmp/out
   exit 1
 fi
 
