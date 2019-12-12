@@ -36,7 +36,7 @@ If your `user`-name, and the repo path (`slug`) are both the same on Github and 
 steps:
 - uses: actions/checkout@master
 
-- uses: meeDamian/sync-readme@v1.0.4
+- uses: meeDamian/sync-readme@v1.0.6
   with:
     pass: ${{ secrets.DOCKER_PASS }}
     description: true
@@ -50,7 +50,7 @@ If everything needs to be specified:
 steps:
 - uses: actions/checkout@master
 
-- uses: meeDamian/sync-readme@v1.0.4
+- uses: meeDamian/sync-readme@v1.0.6
   with:
     user: docker-username
     pass: ${{ secrets.DOCKER_PASS }}
